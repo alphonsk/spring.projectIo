@@ -2,6 +2,7 @@ package com.george.projectmanagement.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Employee {
@@ -13,9 +14,13 @@ public class Employee {
     private String lastName;
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Project theProject;
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
+            fetch = FetchType.LAZY)
+    @JoinTable(name = "project_employee",
+            joinColumns= @JoinColumn(name = "employee_id"),
+            inverseJoinColumns= @JoinColumn(name = "project_id")
+    )
+    private List<Project> theProjects;
 
     public Employee() {
     }
@@ -56,6 +61,14 @@ public class Employee {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Project> getTheProjects() {
+        return theProjects;
+    }
+
+    public void setTheProjects(List<Project> theProjects) {
+        this.theProjects = theProjects;
     }
 
     // END
