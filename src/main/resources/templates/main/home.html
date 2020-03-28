@@ -1,55 +1,178 @@
-
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
 
-<!--<head th:replace="layouts :: header"></head> -->
+<head th:replace="layouts :: header"></head>
 
 <body>
-<!---->
-    <nav th:replace="layouts :: navbar">
-    </nav>
+
+    <nav th:replace="layouts :: navbar"></nav>
+
 
     <div class="container">
-        <h3>Projects</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Project Name </th>
-                    <th>Project Stage</th>
-                    <th>Project Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each ="project: ${projects}">
-                    <td th:text="${project.name}"/>
-                    <td th:text="${project.stage}"/>
-                    <td th:text="${project.description}"/>
-                </tr>
-            </tbody>
-        </table>
 
-        <!--        -->
+    <!--    <h3>Main Dashboard</h3>-->
+    <!--    <a th:text="${versionNumber}"></a>-->
 
-        <h3>Employees</h3>
-        <table>
-            <thead>
-            <tr>
-                <th>Employee FirstName </th>
-                <th>Employee LastName</th>
-                <th>Employee Email</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each ="employee: ${employees}">
-                <td th:text="${employee.firstName}"/>
-                <td th:text="${employee.lastName}"/>
-                <td th:text="${employee.email}"/>
-            </tr>
-            </tbody>
-        </table>
+        <h4> Current Projects </h4>
+        <div class="row">
+            <div class="col-md-4">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th> Project Name </th>
+                            <th> Project Stage </th>
+<!--                            <th> Project Count</th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each ="project: ${projects}">
+                            <td th:text="${project.Name}"/>
+                            <td th:text="${project.stage}"/>
+<!--                            <td th:text="${employeeProjectsCount.projectCount}"/>-->
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="col-md-4">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th> Project Stage </th>
+                        <th> Project Count </th>
+                        <!--                            <th> Project Count</th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each ="projectStage: ${projectStages}">
+                        <td th:text="${projectStage.stage}"/>
+                        <td th:text="${projectStage.count}"/>
+                        <!--                            <td th:text="${employeeProjectsCount.projectCount}"/>-->
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+
+            <div class="col-md-4">
+                <canvas id="myPieChart" height="50" width="50"></canvas>
+                    <canvas id="myChart"></canvas>
+                <!--   json              -->
+                    <script>
+                        var chartData = "[[${jsonProjectStages}]]"
+                    </script>
+            </div>
+        </div>
+
     </div>
 
+    <div class="container">
+
+        <!--    <h3>Main Dashboard</h3>-->
+        <!--    <a th:text="${versionNumber}"></a>-->
+
+        <h4> Employee Project count </h4>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th> First Name </th>
+                        <th> Last Name </th>
+                        <th> Email </th>
+                        <th> Project Count</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each ="employeeProjectsCount: ${employeeProjectsCounts}">
+                        <td th:text="${employeeProjectsCount.firstName}"/>
+                        <td th:text="${employeeProjectsCount.lastName}"/>
+                        <td th:text="${employeeProjectsCount.email}"/>
+                        <td th:text="${employeeProjectsCount.projectCount}"/>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+            
+        </div>
+
+    </div>
+
+    <div class="container">
+    <h4> Current Employees </h4>
+        <div class="row">
+            <div class="col-md">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th> First Name </th>
+                            <th> Last Name </th>
+                            <th> Email </th>
+                            <th> Project Count </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each ="employeeProjectsCount: ${employeeProjectsCounts}">
+                            <td th:text="${employeeProjectsCount.firstName}"/>
+                            <td th:text="${employeeProjectsCount.lastName}"/>
+                            <td th:text="${employeeProjectsCount.email}"/>
+                            <td th:text="${employeeProjectsCount.projectCount}"/>
+                        </tr>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript" th:src="@{js/myChart.js}"></script>
+
+</body>
+
+
+<!-- -->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--                <tr th:each ="project: ${projects}">-->
+<!--                    <td th:text="${project.name}"/>-->
+<!--                    <td th:text="${project.stage}"/>-->
+<!--                    <td th:text="${project.description}"/>-->
+<!--                </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+
+<!--        &lt;!&ndash;        &ndash;&gt;-->
+
+<!--        <h3>Employees</h3>-->
+<!--        <table>-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>Employee FirstName </th>-->
+<!--                <th>Employee LastName</th>-->
+<!--                <th>Employee Email</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each ="employee: ${employees}">-->
+<!--                <td th:text="${employee.firstName}"/>-->
+<!--                <td th:text="${employee.lastName}"/>-->
+<!--                <td th:text="${employee.email}"/>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    &lt;!&ndash;        &ndash;&gt;-->
+<!--    </div>-->
+
+<!--    <div style="height:200px;width:200px;">-->
+<!--        <canvas id="myChart"></canvas>-->
+<!--    </div>-->
+<!--    <script type="text/javascript" th:src="@{js/myChart.js}"></script>-->
 </body>
 
 </html>

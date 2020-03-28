@@ -16,9 +16,9 @@ insert into project (project_id, name, stage, description) values (1002, 'Office
 insert into project (project_id, name, stage, description) values (1003, 'Improve Intranet Security', 'INPROGRESS', 'With the recent data hack, the office security needs to be improved and proper security team needs to be hired for implementation');
 
 -- INSERT PROJECT_EMPLOYEE_RELATION (Removed duplicates from video)
---insert into project_employee (employee_id, project_id) values (1,1000);
---insert into project_employee (employee_id, project_id) values (1,1001);
---insert into project_employee (employee_id, project_id) values (1,1002);
---insert into project_employee (employee_id, project_id) values (3,1000);
---insert into project_employee (employee_id, project_id) values (6,1002);
---insert into project_employee (employee_id, project_id) values (6,1003);
+insert into project_employee (employee_id, project_id) values (1,1000);
+insert into project_employee (employee_id, project_id) values (1,1001);
+insert into project_employee (employee_id, project_id) values (1,1002);
+insert into project_employee (employee_id, project_id) values (3,1000);
+insert into project_employee (employee_id, project_id) values (6,1002);
+insert into project_employee (employee_id, project_id) values (6,1003);
