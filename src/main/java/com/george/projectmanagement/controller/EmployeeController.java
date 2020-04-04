@@ -35,7 +35,7 @@ public class EmployeeController {
     public String createProject(Employee employee, Model model) {
         employeeRepository.save(employee);
         // use a redirect to prevent duplicate submissions
-        return "redirect:/employees/new ";
+        return "redirect:/employee";
     }
 
 

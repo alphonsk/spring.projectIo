@@ -42,7 +42,7 @@ public class ProjectController {
     public String createProject(Project project, Model model) {
         projectRepository.save(project);
         // use a redirect to prevent duplicate submissions
-        return "redirect:/projects/new ";
+        return "redirect:/projects ";
 
     }
 
