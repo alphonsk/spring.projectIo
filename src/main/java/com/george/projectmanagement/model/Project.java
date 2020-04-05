@@ -1,5 +1,7 @@
 package com.george.projectmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -19,6 +21,8 @@ public class Project {
             joinColumns= @JoinColumn(name = "project_id"),
             inverseJoinColumns= @JoinColumn(name = "employee_id")
     )
+    //    Stops the find all loop because of manytomany association
+    @JsonIgnore
     private List<Employee> employees;
 
     public Project() {

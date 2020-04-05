@@ -8,6 +8,9 @@ import com.george.projectmanagement.repository.EmployeeRepository;
 import com.george.projectmanagement.repository.ProjectRepository;
 import com.george.projectmanagement.repository.impl.Employeeproject;
 import com.george.projectmanagement.repository.impl.ProjectStage;
+import com.george.projectmanagement.services.EmployeeServices;
+import com.george.projectmanagement.services.HomeService;
+import com.george.projectmanagement.services.ProjectServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -26,19 +29,23 @@ public class HomeController {
     // read values from aplicationresource file
     @Value("${foo}")
     private String foo;
+    
+    @Autowired
+    HomeService homeService;
 
     @Autowired
-    ProjectRepository projectRepository;
+    ProjectServices projectServices;
     @Autowired
-    EmployeeRepository employeeRepository;
+    EmployeeServices employeeServices;
+
 
 
     @GetMapping("/")
     public String displayAll(Model model) throws JsonProcessingException {
-        List<Project> projects = projectRepository.findAll();
-        List<Employee> employees = employeeRepository.findAll();
-        List<Employeeproject> employeeProjectsCounts = employeeRepository.employeeprojects();
-        List<ProjectStage> projectStages = projectRepository.projectStages();
+        List<Project> projects = projectServices.findAll();
+        List<Employee> employees = employeeServices.findAll();
+        List<Employeeproject> employeeProjectsCounts = employeeServices.employeeprojects();
+        List<ProjectStage> projectStages = projectServices.projectStages();
         // turn projectStages to json
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonProjectStages = objectMapper.writeValueAsString(projectStages);

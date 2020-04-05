@@ -2,6 +2,7 @@ package com.george.projectmanagement.controller;
 
 import com.george.projectmanagement.model.Employee;
 import com.george.projectmanagement.repository.EmployeeRepository;
+import com.george.projectmanagement.services.EmployeeServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +17,11 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    EmployeeRepository employeeRepository;
+    private EmployeeServices employeeServices;
 
     @GetMapping
     public String displayEmployees(Model model) {
-        List<Employee> employees = employeeRepository.findAll();
+        List<Employee> employees = employeeServices.findAll();
         model.addAttribute("employees", employees);
         return "employee/employees";
     }
@@ -33,9 +34,9 @@ public class EmployeeController {
 
     @PostMapping("/save")
     public String createProject(Employee employee, Model model) {
-        employeeRepository.save(employee);
+        employeeServices.save(employee);
         // use a redirect to prevent duplicate submissions
-        return "redirect:/employee";
+        return "redirect:/employees";
     }
 
 
