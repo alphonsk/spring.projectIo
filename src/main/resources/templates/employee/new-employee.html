@@ -4,22 +4,43 @@
 
 <head th:replace="layouts :: header"></head>
 
-<body>
-<!---->
-<nav th:replace="layouts :: navbar">
-    </nav>
+    <body>
+    <!---->
+        <nav th:replace="layouts :: navbar">
+        </nav>
 
-    <div class="container">
-        <form th:action="@{/employees/save}" th:object="${employee}" method="POST">
-            <input type="text" placeholder="First Name" th:field="${employee.firstName}">
-            <input type="text" placeholder="Project Name" th:field="${employee.lastName}">
-            <input type="text" placeholder="Project Name" th:field="${employee.email}">
+        <div class="container">
+            <h4>Create a new Project</h4>
+            <form th:action="@{/employees/save}" th:object="${employee}" method="POST">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="firstName">First name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="firstName" placeholder="Enter first name" name="name" th:field="${employee.firstName}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="lastName">Last name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="lastName" placeholder="Enter last name" name="name" th:field="*{lastName}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Last name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="email" placeholder="Enter your email" name="name" th:field="*{email}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">Add Employee</button>
+                    </div>
+                </div>
+            </form>
+        </div>
 
 
-            <button type="submit">Create Employee</button>
-        </form>
-    </div>
 
-</body>
+
+    </body>
 
 </html>
