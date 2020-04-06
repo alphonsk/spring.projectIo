@@ -10,24 +10,30 @@
         </nav>
 
         <div class="container">
-            <h4>Create a new Project</h4>
-            <form th:action="@{/employees/save}" th:object="${employee}" method="POST">
-                <div class="form-group">
+            <h4>Add an Employee</h4>
+            <form th:action="@{/employees/save}" th:object="${employee}" method="POST" id="employeeForm">
+                <div class="form-group" th:classappend="${#fields.hasErrors('firstName')} ? has-error : ''" >
                     <label class="control-label col-sm-2" for="firstName">First name:</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-10" th:classappend="${#fields.hasErrors('firstName')} ? 'input-icon right' : ''">
+                        <i th:if="${#fields.hasErrors('firstName')}" class="fa fa-exclamation tooltips" data-original-title="please enter a valid first name" data-container="body"></i>
                         <input type="text" class="form-control" id="firstName" placeholder="Enter first name" name="name" th:field="${employee.firstName}">
+                        <span th:if="${#fields.hasErrors('firstName')}" class="help-block" th:errors="*{firstName}"></span>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" th:classappend="${#fields.hasErrors('lastName')} ? has-error : ''">
                     <label class="control-label col-sm-2" for="lastName">Last name:</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-10" th:classappend="${#fields.hasErrors('lastName')} ? 'input-icon right' : ''">
+                        <i th:if="${#fields.hasErrors('lastName')}" class="fa fa-exclamation tooltips" data-original-title="please enter a valid last name" data-container="body"></i>
                         <input type="text" class="form-control" id="lastName" placeholder="Enter last name" name="name" th:field="*{lastName}">
+                        <span th:if="${#fields.hasErrors('lastName')}" class="help-block" th:errors="*{lastName}"></span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="email">Last name:</label>
-                    <div class="col-sm-10">
+                    <label class="control-label col-sm-2" for="email">Email:</label>
+                    <div class="col-sm-10" th:classappend="${#fields.hasErrors('email')} ? 'input-icon right' : ''">
+                        <i th:if="${#fields.hasErrors('email')}" class="fa fa-exclamation tooltips" data-original-title="please enter a valid last email" data-container="body"></i>
                         <input type="text" class="form-control" id="email" placeholder="Enter your email" name="name" th:field="*{email}">
+                        <span th:if="${#fields.hasErrors('email')}" class="help-block" th:errors="*{email}"></span>
                     </div>
                 </div>
                 <div class="form-group">

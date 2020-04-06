@@ -6,10 +6,12 @@ import com.george.projectmanagement.services.EmployeeServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -33,9 +35,17 @@ public class EmployeeController {
     }
 
     @PostMapping("/save")
-    public String createProject(Employee employee, Model model) {
+    public String createProject(@Valid Employee employee, BindingResult bindingResult, Model model) {
+        //check for errors
+        if (bindingResult.hasErrors()) {
+            // return goes to page
+            return "employee/new-employee";
+        }
+
+        //if there are no errors, show form success screen
         employeeServices.save(employee);
         // use a redirect to prevent duplicate submissions
+        // redirect goes to mapping url
         return "redirect:/employees";
     }
 

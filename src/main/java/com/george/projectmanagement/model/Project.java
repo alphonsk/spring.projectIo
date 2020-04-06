@@ -3,6 +3,8 @@ package com.george.projectmanagement.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Entity
@@ -12,6 +14,8 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long projectId;
     private String name;
+    @NotNull
+    @Pattern(regexp="^(?=\\s*\\S).*$", message="Please select a stage")
     private String stage;
     private String description;
 
