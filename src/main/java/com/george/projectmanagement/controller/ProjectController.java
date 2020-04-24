@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -34,8 +35,14 @@ public class ProjectController {
     }
 
     @GetMapping("/new")
-    public String displayProjectForm(Model model) {
+    public String displayProjectForm(Model model, RedirectAttributes redirectAttributes) {
+        // redirect an obj to another controller employeeController
         List<Employee> employees = employeeServices.findAll();
+        if (employees.size() <= 0) {
+            model.addAttribute("employee", new Employee());
+            redirectAttributes.addFlashAttribute("noEmployeeError", "no email");
+            return "redirect:/employees/new";
+        }
         model.addAttribute("project", new Project());
         model.addAttribute("employees", employees);
         return "project/new-project";

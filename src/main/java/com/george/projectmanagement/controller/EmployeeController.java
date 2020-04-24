@@ -10,9 +10,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/employees")
@@ -29,7 +32,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/new")
-    public String displayProjectForm(Model model) {
+    public String displayProjectForm(Model model, HttpServletRequest request){
+        // redirect an obj from another controller ProjectController
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if(flashMap != null) {
+            String emailError = (String) flashMap.get("noEmployeeError");
+        }
         model.addAttribute("employee", new Employee());
         return "employee/new-employee";
     }
